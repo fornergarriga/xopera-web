@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Xarxes Socials — La Xopera Festival</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;600;700&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+  <style>
+    .social-hero {
+      text-align: center;
+      padding: 4rem 0 3rem;
+    }
+
+    .social-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .social-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 3rem 2rem 2.5rem;
+      border-radius: 10px;
+      border: 1px solid #200000;
+      background: var(--bg-2);
+      text-decoration: none;
+      color: var(--white);
+      transition: transform 0.28s ease, border-color 0.28s ease, background 0.28s ease;
+      overflow: hidden;
+      gap: 1.5rem;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .social-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.28s ease;
+    }
+
+    .social-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--red-dark);
+    }
+
+    .social-card:hover::before { opacity: 1; }
+
+    /* Instagram */
+    .social-card.instagram::before {
+      background: radial-gradient(ellipse at bottom right, rgba(131,58,180,0.12), rgba(253,29,29,0.08), transparent 70%);
+    }
+    .social-card.instagram:hover { border-color: #8B3AB4; }
+
+    /* TikTok */
+    .social-card.tiktok::before {
+      background: radial-gradient(ellipse at bottom, rgba(0,242,234,0.08), transparent 70%);
+    }
+    .social-card.tiktok:hover { border-color: #00F2EA; }
+
+    /* YouTube */
+    .social-card.youtube::before {
+      background: radial-gradient(ellipse at bottom left, rgba(255,0,0,0.12), transparent 70%);
+    }
+    .social-card.youtube:hover { border-color: #FF0000; }
+
+    .sc-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      position: relative;
+    }
+
+    .instagram .sc-icon { background: linear-gradient(135deg, #833AB4, #FD1D1D, #FCB045); }
+    .tiktok   .sc-icon { background: #010101; border: 1px solid #2a2a2a; }
+    .youtube  .sc-icon { background: #FF0000; }
+
+    .sc-name {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .sc-handle {
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.8rem;
+      color: var(--gray);
+      letter-spacing: 0.05em;
+    }
+
+    .sc-desc {
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.82rem;
+      color: var(--white-dim);
+      line-height: 1.55;
+    }
+
+    .sc-btn {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 0.6rem 1.4rem;
+      border-radius: 5px;
+      border: 1.5px solid rgba(240,238,236,0.4);
+      color: var(--white);
+      background: transparent;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+      width: 100%;
+    }
+
+    .social-card:hover .sc-btn {
+      background: var(--white);
+      color: #060404;
+      border-color: var(--white);
+    }
+
+    /* Tiktok icon SVG */
+    .tiktok-svg {
+      width: 36px;
+      height: 36px;
+      fill: white;
+    }
+
+    /* Footer text */
+    .social-footer {
+      text-align: center;
+      margin-top: 5rem;
+      padding-top: 3rem;
+      border-top: 1px solid #1a0000;
+    }
+    .social-footer p {
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.85rem;
+      color: var(--white-dim);
+      max-width: 520px;
+      margin: 0 auto 1.5rem;
+    }
+
+    @media (max-width: 760px) {
+      .social-grid { grid-template-columns: 1fr; max-width: 420px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrap">
+
+    <div class="social-hero reveal">
+      <span style="font-family:'Oswald',sans-serif;font-size:.7rem;font-weight:600;letter-spacing:.25em;text-transform:uppercase;color:var(--red-bright);display:block;margin-bottom:1rem;">Troba'ns</span>
+      <h1>Xarxes Socials</h1>
+      <div class="divider" style="margin:1.4rem auto 1.6rem;"></div>
+      <p style="color:var(--white-dim);max-width:480px;margin:0 auto;font-size:.9rem;font-family:'Courier Prime',monospace;">Segueix La Xopera per estar al dia de totes les novetats, anuncis d'artistes i activitats del festival.</p>
+    </div>
+
+    <div class="social-grid">
+
+      <!-- Instagram -->
+      <a href="https://www.instagram.com/xopera.festival/" target="_blank" class="social-card instagram reveal d1">
+        <div class="sc-icon">📸</div>
+        <div>
+          <div class="sc-name">Instagram</div>
+          <div class="sc-handle">@xopera.festival</div>
+        </div>
+        <p class="sc-desc">El nostre canal principal. Cartells d'artistes, informació del festival, darreres notícies.</p>
+        <div class="sc-btn">Seguir a Instagram</div>
+      </a>
+
+      <!-- TikTok -->
+      <a href="https://www.tiktok.com/@xopera.festival" target="_blank" class="social-card tiktok reveal d2">
+        <div class="sc-icon">
+          <svg class="tiktok-svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.19 8.19 0 004.78 1.52V6.75a4.85 4.85 0 01-1.01-.06z"/>
+          </svg>
+        </div>
+        <div>
+          <div class="sc-name">TikTok</div>
+          <div class="sc-handle">@xopera.festival</div>
+        </div>
+        <p class="sc-desc">Contingut en curt, directe i sense filtres. El festival en 60 segons.</p>
+        <div class="sc-btn">Seguir a TikTok</div>
+      </a>
+
+      <!-- YouTube -->
+      <a href="https://www.youtube.com/@xoperafestival" target="_blank" class="social-card youtube reveal d3">
+        <div class="sc-icon">▶</div>
+        <div>
+          <div class="sc-name">YouTube</div>
+          <div class="sc-handle">@xoperafestival</div>
+        </div>
+        <p class="sc-desc">Aftermovies, actuacions en directe i contingut especial del festival.</p>
+        <div class="sc-btn">Visitar YouTube</div>
+      </a>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="social-footer reveal">
+      <p>Tot el contingut de La Xopera és creat per l'equip organitzador de forma voluntària i autogestionada. Sense agències. Sense corporatius.</p>
+      <p style="font-family:'Oswald',sans-serif;font-size:1.1rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--white);margin-top:1rem;">Autogestió o Barbàrie.</p>
+    </div>
+
+  </div><!-- /page-wrap -->
+
+  <script src="js/nav.js"></script>
+</body>
+</html>

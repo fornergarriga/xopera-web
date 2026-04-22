@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacte — La Xopera Festival</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;600;700&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+  <style>
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    /* ── Sidebar info ── */
+    .contact-sidebar {
+      position: sticky;
+      top: calc(var(--nav-h) + 2rem);
+    }
+
+    .contact-info-block {
+      margin-bottom: 2.5rem;
+    }
+
+    .cib-label {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--red-bright);
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .cib-val {
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.92rem;
+      color: var(--white-dim);
+      line-height: 1.6;
+    }
+
+    .cib-val a {
+      color: var(--white);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .cib-val a:hover { color: var(--red-bright); }
+
+    /* Socials mini */
+    .mini-socials {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+    .ms-btn {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.4rem 0.75rem;
+      border: 1px solid #2a0000;
+      border-radius: 4px;
+      color: var(--white-dim);
+      text-decoration: none;
+      transition: border-color 0.18s, color 0.18s;
+    }
+    .ms-btn:hover { border-color: var(--red-dark); color: var(--white); }
+
+    /* ── Formulari ── */
+    .contact-form-wrap {}
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+
+    .form-submit-row {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-top: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .form-note {
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.72rem;
+      color: var(--gray);
+      line-height: 1.5;
+      flex: 1;
+      min-width: 200px;
+    }
+
+    /* ── Success state ── */
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 4rem 2rem;
+      border: 1px solid var(--red-deep);
+      border-radius: 10px;
+      background: var(--bg-2);
+    }
+
+    .fs-icon {
+      font-size: 3rem;
+      margin-bottom: 1.2rem;
+      display: block;
+    }
+
+    .fs-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.75rem;
+    }
+
+    .fs-text {
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.88rem;
+      color: var(--white-dim);
+      max-width: 380px;
+      margin: 0 auto 2rem;
+      line-height: 1.6;
+    }
+
+    /* Required asterisk */
+    .req { color: var(--red-bright); }
+
+    /* Input states */
+    .form-input.error,
+    .form-select.error,
+    .form-textarea.error {
+      border-color: var(--red-bright);
+    }
+    .field-error {
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.72rem;
+      color: var(--red-bright);
+      margin-top: 0.3rem;
+      display: none;
+    }
+    .field-error.show { display: block; }
+
+    /* Char counter */
+    .char-counter {
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.68rem;
+      color: var(--gray);
+      text-align: right;
+      margin-top: 0.25rem;
+    }
+
+    @media (max-width: 960px) {
+      .contact-layout {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+      .contact-sidebar { position: static; }
+    }
+
+    @media (max-width: 600px) {
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrap">
+
+    <!-- Header -->
+    <div class="reveal" style="margin-bottom:4rem;">
+      <span style="font-family:'Oswald',sans-serif;font-size:.7rem;font-weight:600;letter-spacing:.25em;text-transform:uppercase;color:var(--red-bright);display:block;margin-bottom:1rem;">Escriu-nos</span>
+      <h1>Contacte</h1>
+      <div class="divider"></div>
+      <p style="color:var(--white-dim);max-width:580px;font-size:.92rem;">Tens alguna proposta, vols fer-te soci, ets una marca que vol col·laborar o simplement vols dir hola? Escriu-nos.</p>
+    </div>
+
+    <div class="contact-layout">
+
+      <!-- ── FORMULARI ── -->
+      <div class="contact-form-wrap reveal">
+
+        <div id="contact-form-container">
+          <form id="contact-form" novalidate>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="nom">Nom complet <span class="req">*</span></label>
+                <input type="text" id="nom" name="nom" class="form-input" placeholder="El teu nom" autocomplete="name" required>
+                <div class="field-error" id="err-nom">El nom és obligatori.</div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="telefon">Telèfon</label>
+                <input type="tel" id="telefon" name="telefon" class="form-input" placeholder="+34 600 000 000" autocomplete="tel">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="correu">Correu electrònic <span class="req">*</span></label>
+              <input type="email" id="correu" name="correu" class="form-input" placeholder="correu@exemple.com" autocomplete="email" required>
+              <div class="field-error" id="err-correu">Introdueix un correu vàlid.</div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="motiu">Motiu de contacte <span class="req">*</span></label>
+              <select id="motiu" name="motiu" class="form-select" required>
+                <option value="" disabled selected>Selecciona un motiu…</option>
+                <option value="patrocini">Patrocini</option>
+                <option value="suggerencia">Suggerència</option>
+                <option value="soci">Vull fer-me soci</option>
+                <option value="marxandising">Marxandising</option>
+                <option value="altre">Altre motiu</option>
+              </select>
+              <div class="field-error" id="err-motiu">Selecciona un motiu.</div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="missatge">Missatge <span class="req">*</span></label>
+              <textarea id="missatge" name="missatge" class="form-textarea" placeholder="Explica'ns el que necessites…" maxlength="1200" required></textarea>
+              <div class="char-counter"><span id="char-count">0</span> / 1200</div>
+              <div class="field-error" id="err-missatge">El missatge és obligatori.</div>
+            </div>
+
+            <div class="form-submit-row">
+              <button type="submit" class="btn btn-lg" id="submit-btn">Enviar Missatge</button>
+              <p class="form-note">Responem en un termini de 48–72 hores. La informació enviada s'utilitza exclusivament per a gestionar la teua consulta.</p>
+            </div>
+
+          </form>
+        </div>
+
+        <!-- Success -->
+        <div class="form-success" id="form-success">
+          <span class="fs-icon">✓</span>
+          <div class="fs-title">Missatge enviat</div>
+          <p class="fs-text">Hem rebut el teu missatge. T'escrivim prompte, normalment en 48–72 hores.</p>
+          <a href="index.html" class="btn">Tornar a l'inici</a>
+        </div>
+
+      </div>
+
+      <!-- ── SIDEBAR ── -->
+      <aside class="contact-sidebar reveal d2">
+
+        <div class="contact-info-block">
+          <span class="cib-label">Organització</span>
+          <div class="cib-val">Associació La Xopera<br>Camp de Morvedre, País Valencià</div>
+        </div>
+
+        <div class="contact-info-block">
+          <span class="cib-label">Xarxes Socials</span>
+          <div class="mini-socials">
+            <a href="https://www.instagram.com/xopera.festival/" target="_blank" class="ms-btn">Instagram</a>
+            <a href="https://www.tiktok.com/@xopera.festival" target="_blank" class="ms-btn">TikTok</a>
+            <a href="https://www.youtube.com/@xoperafestival" target="_blank" class="ms-btn">YouTube</a>
+          </div>
+        </div>
+
+        <div class="contact-info-block">
+          <span class="cib-label">Motius habituals</span>
+          <div class="cib-val" style="font-size:.82rem;display:flex;flex-direction:column;gap:.5rem;margin-top:.25rem;">
+            <div style="border:1px solid #1e0000;border-radius:5px;padding:.6rem .9rem;cursor:pointer;transition:border-color .15s;"
+                 onmouseover="this.style.borderColor='var(--red-dark)'" onmouseout="this.style.borderColor='#1e0000'"
+                 onclick="document.getElementById('motiu').value='patrocini'">
+              <strong style="font-family:'Oswald',sans-serif;font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;">Patrocini</strong>
+              <p style="color:var(--gray);font-size:.75rem;margin:0;margin-top:.2rem;">Col·labora econòmicament amb el festival.</p>
+            </div>
+            <div style="border:1px solid #1e0000;border-radius:5px;padding:.6rem .9rem;cursor:pointer;transition:border-color .15s;"
+                 onmouseover="this.style.borderColor='var(--red-dark)'" onmouseout="this.style.borderColor='#1e0000'"
+                 onclick="document.getElementById('motiu').value='soci'">
+              <strong style="font-family:'Oswald',sans-serif;font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;">Fer-me Soci/a</strong>
+              <p style="color:var(--gray);font-size:.75rem;margin:0;margin-top:.2rem;">Uneix-te a l'associació i ajuda a créixer el festival.</p>
+            </div>
+            <div style="border:1px solid #1e0000;border-radius:5px;padding:.6rem .9rem;cursor:pointer;transition:border-color .15s;"
+                 onmouseover="this.style.borderColor='var(--red-dark)'" onmouseout="this.style.borderColor='#1e0000'"
+                 onclick="document.getElementById('motiu').value='suggerencia'">
+              <strong style="font-family:'Oswald',sans-serif;font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;">Suggerència</strong>
+              <p style="color:var(--gray);font-size:.75rem;margin:0;margin-top:.2rem;">Tens una idea per a millorar el festival?</p>
+            </div>
+          </div>
+        </div>
+
+        <div style="border-top:1px solid #1a0000;padding-top:1.5rem;margin-top:0.5rem;">
+          <p style="font-family:'Oswald',sans-serif;font-size:.9rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--red-bright);">Autogestió o Barbàrie.</p>
+          <p style="font-family:'Courier Prime',monospace;font-size:.78rem;color:var(--gray);margin-top:.4rem;line-height:1.5;">La Xopera és autogestionada. Darrere d'aquest formulari hi ha persones reals que responen quan poden, però sempre responen.</p>
+        </div>
+
+      </aside>
+
+    </div><!-- /contact-layout -->
+
+  </div><!-- /page-wrap -->
+
+  <script src="js/nav.js"></script>
+  <script>
+    /* ── Char counter ── */
+    const missatge = document.getElementById('missatge');
+    const counter  = document.getElementById('char-count');
+    missatge.addEventListener('input', () => { counter.textContent = missatge.value.length; });
+
+    /* ── Pre-fill from URL params ── */
+    const params = new URLSearchParams(location.search);
+    const motivParam = params.get('motiu');
+    if (motivParam) {
+      const sel = document.getElementById('motiu');
+      for (const opt of sel.options) {
+        if (opt.value === motivParam) { sel.value = motivParam; break; }
+      }
+    }
+    const producte = params.get('producte');
+    if (producte) {
+      missatge.value = `Vull encarregar: ${producte}\n\nTalla / quantitat: \nAltra informació: `;
+      counter.textContent = missatge.value.length;
+    }
+
+    /* ── Validació i submit ── */
+    const form    = document.getElementById('contact-form');
+    const success = document.getElementById('form-success');
+    const fwrap   = document.getElementById('contact-form-container');
+
+    function showErr(id, show) {
+      document.getElementById(id).classList.toggle('show', show);
+    }
+
+    function validateEmail(v) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+    }
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const nom     = document.getElementById('nom');
+      const correu  = document.getElementById('correu');
+      const motiu   = document.getElementById('motiu');
+      const msg     = document.getElementById('missatge');
+
+      let ok = true;
+
+      const nomOk = nom.value.trim().length > 1;
+      nom.classList.toggle('error', !nomOk);
+      showErr('err-nom', !nomOk);
+      if (!nomOk) ok = false;
+
+      const correuOk = validateEmail(correu.value.trim());
+      correu.classList.toggle('error', !correuOk);
+      showErr('err-correu', !correuOk);
+      if (!correuOk) ok = false;
+
+      const motiuOk = motiu.value !== '';
+      motiu.classList.toggle('error', !motiuOk);
+      showErr('err-motiu', !motiuOk);
+      if (!motiuOk) ok = false;
+
+      const msgOk = msg.value.trim().length > 5;
+      msg.classList.toggle('error', !msgOk);
+      showErr('err-missatge', !msgOk);
+      if (!msgOk) ok = false;
+
+      if (!ok) return;
+
+      /* Simula enviament */
+      const btn = document.getElementById('submit-btn');
+      btn.textContent = 'Enviant…';
+      btn.disabled = true;
+
+      setTimeout(() => {
+        fwrap.style.display  = 'none';
+        success.style.display = 'block';
+      }, 900);
+    });
+
+    /* Clear errors on input */
+    ['nom','correu','motiu','missatge'].forEach(id => {
+      document.getElementById(id).addEventListener('input', () => {
+        document.getElementById(id).classList.remove('error');
+        const errEl = document.getElementById('err-' + id);
+        if (errEl) errEl.classList.remove('show');
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manifest — La Xopera Festival</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;600;700&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+  <style>
+    /* Fons lleuger amb textura */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 20% 40%, rgba(100,0,0,0.08) 0%, transparent 55%),
+        radial-gradient(ellipse at 80% 70%, rgba(80,0,0,0.06) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .page-wrap { position: relative; z-index: 1; }
+
+    /* ── Intro ── */
+    .manifest-intro {
+      text-align: center;
+      padding: 3.5rem 0 5rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* ── Blocs de text ── */
+    .manifest-block {
+      max-width: 720px;
+      margin: 0 auto 6rem;
+    }
+
+    .manifest-label {
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--red-bright);
+      display: block;
+      margin-bottom: 2.5rem;
+    }
+
+    .manifest-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      line-height: 1.0;
+      margin-bottom: 3.5rem;
+      color: var(--white);
+    }
+
+    .manifest-title span { color: var(--red-bright); }
+
+    /* Paràgrafs del manifest */
+    .manifest-p {
+      font-family: 'Courier Prime', monospace;
+      font-size: clamp(1rem, 1.8vw, 1.18rem);
+      line-height: 1.85;
+      color: rgba(240,238,236,0.88);
+      margin-bottom: 2.2rem;
+    }
+
+    .manifest-p .red-text {
+      color: var(--red-bright);
+      font-weight: 700;
+    }
+
+    /* Separadors */
+    .manifest-sep {
+      text-align: center;
+      margin: 3.5rem 0;
+      color: var(--red-dark);
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.2rem;
+      letter-spacing: 0.4em;
+    }
+
+    /* Cita gran */
+    .big-quote {
+      padding: 4rem 0;
+      text-align: center;
+      border-top: 1px solid #1a0000;
+      border-bottom: 1px solid #1a0000;
+      margin: 4rem 0;
+    }
+
+    .big-quote .bq-text {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(1.6rem, 4vw, 3.2rem);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      line-height: 1.2;
+      color: var(--white);
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .big-quote .bq-text em {
+      color: var(--red-bright);
+      font-style: normal;
+    }
+
+    /* Cita en paper (estil la declaració) */
+    .paper-quote {
+      background: #f0ece6;
+      color: #1a0000;
+      border-radius: 4px;
+      padding: 3rem;
+      margin: 4rem auto;
+      max-width: 680px;
+      position: relative;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+    }
+
+    .paper-quote::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      border-radius: 4px;
+      pointer-events: none;
+    }
+
+    .paper-quote .pq-place {
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      color: #660000;
+      text-align: right;
+      margin-bottom: 1.5rem;
+    }
+
+    .paper-quote p {
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.95rem;
+      line-height: 1.78;
+      color: #1a0505;
+      position: relative;
+    }
+
+    .paper-quote .highlight {
+      color: #cc0000;
+      font-weight: 700;
+    }
+
+    .paper-quote .big-highlight {
+      font-size: 1.05rem;
+      color: #cc0000;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    /* Final */
+    .manifest-end {
+      text-align: center;
+      padding: 5rem 0 2rem;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .manifest-end .end-phrase {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(1.4rem, 3.5vw, 2.8rem);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      line-height: 1.15;
+      color: var(--red-bright);
+      margin-bottom: 1rem;
+    }
+
+    .manifest-end .end-sub {
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.85rem;
+      color: var(--white-dim);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    /* Línia decorativa */
+    .red-rule {
+      display: block;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--red), transparent);
+      margin: 3rem 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrap">
+
+    <!-- Intro -->
+    <div class="manifest-intro reveal">
+      <span class="manifest-label">Estivella, 2025</span>
+      <h1 style="font-size:clamp(1.8rem,5vw,3.5rem);margin-bottom:1rem;">Qui Som.<br>Per Què Existim.</h1>
+      <div class="divider" style="margin:1.5rem auto;"></div>
+    </div>
+
+    <!-- Primer bloc -->
+    <div class="manifest-block">
+
+      <div class="manifest-title reveal">
+        Estem<br><span>Farts.</span>
+      </div>
+
+      <p class="manifest-p reveal">
+        Estem farts de festivals que solament busquen fer negoci a costa de la nostra butxaca mentre netegen la cara de multinacionals o fons d'inversió que especulen amb la vida. <span class="red-text">La Xopera naix del poble i per al poble.</span> Som el crit de la jove treballadora que no arriba a final de mes i de l'adult fart de vore cap on va dirigit aquest món.
+      </p>
+
+      <span class="red-rule reveal"></span>
+
+      <p class="manifest-p reveal">
+        <span class="red-text">Ho diem clar:</span> Som la veu de les persones que viuen ofegades, que no tenen temps de qualitat amb les seues famílies perquè el treball els consumeix fins l'últim gram d'energia. Ací no venim a consumir cultura de plàstic: <span class="red-text">venim a recuperar el temps que ens han furtat.</span>
+      </p>
+
+      <p class="manifest-p reveal">
+        A La Xopera no hi ha censura, ni lloguers impossibles, ni turisme depredador. Som l'altaveu de la classe obrera en un món que ens vol callats, cansats i precaris.
+      </p>
+
+    </div>
+
+    <!-- Cita gran -->
+    <div class="big-quote reveal">
+      <div class="bq-text">
+        «<em>Som Revolució.</em>»
+      </div>
+    </div>
+
+    <!-- Segon bloc -->
+    <div class="manifest-block">
+
+      <div class="manifest-title reveal" style="font-size:clamp(2.2rem,5.5vw,4.5rem);">
+        Autogestió<br><span>o Barbàrie.</span>
+      </div>
+
+      <p class="manifest-p reveal">
+        La Xopera és un festival autogestionat, on el més important és ser una <span class="red-text">comunitat unida, lliure i lluitadora.</span> La primera edició no hauria sigut possible sense la quantitat d'ajuda externa que se'ns va oferir. Ajuda de tota eixa gent que, sense demanar res a canvi, va ser ací, aportant tot el que era a les seues mans: idees, contactes, organització, menjar o un altre tipus de servei o béns materials.
+      </p>
+
+      <p class="manifest-p reveal">
+        Esta primera edició va ser possible gràcies als artistes, els patrocinadors, l'ajuntament i sobretot, <span class="red-text">a vosaltres.</span> Qualsevol aportació que féreu, per xicoteta que fora, va ajudar i està ajudant a fer la propera edició.
+      </p>
+
+      <span class="red-rule reveal"></span>
+
+      <p class="manifest-p reveal">
+        Volem deixar clar que cap tipus de patrocinador ens manejarà ni ens callarà. No canviarem el nostre discurs per guanyar més diners. <span class="red-text">No ens venem, ni ens vendrem.</span>
+      </p>
+
+    </div>
+
+    <!-- Paper quote -->
+    <div class="paper-quote reveal">
+      <div class="pq-place">Estivella · País Valencià</div>
+      <p><span class="highlight">La Xopera és un lloc lliure de feixisme, racisme i LGTBIQ+fòbia.</span> No tolerarem cap conducta irrespectosa amb la resta de persones que assistisquen al nostre festival, ja siga públic, organitzadors, artistes...</p>
+      <p style="margin-top:1.2rem;">Des de La Xopera prenem ser algo més que un festival, pretenem ser <span class="highlight">un crit, una ferramenta per a aconseguir un canvi, una revolució.</span> Amb unitat, organització i lluita ho aconseguirem.</p>
+      <p style="margin-top:1.5rem;font-size:.85rem;text-align:right;color:#880000;letter-spacing:.05em;">— Associació La Xopera</p>
+    </div>
+
+    <!-- Final -->
+    <div class="manifest-end reveal">
+      <div class="end-phrase">La terra no es ven.<br>La vida no es negocia.</div>
+      <div class="red-rule" style="margin:2rem auto;max-width:200px;"></div>
+      <p class="end-sub">Som Revolució · Estivella · Camp de Morvedre</p>
+      <div style="margin-top:3rem; display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+        <a href="socis.html" class="btn btn-lg">Fes-te Soci</a>
+        <a href="contacte.html" class="btn btn-lg btn-red">Contacta'ns</a>
+      </div>
+    </div>
+
+  </div><!-- /page-wrap -->
+
+  <script src="js/nav.js"></script>
+</body>
+</html>

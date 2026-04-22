@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marxandising — La Xopera Festival</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;600;700&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+  <style>
+    /* ── Header ── */
+    .merch-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 2rem;
+      margin-bottom: 4rem;
+      flex-wrap: wrap;
+    }
+
+    /* ── Banner nota ── */
+    .merch-note {
+      background: var(--bg-2);
+      border: 1px solid #1e0000;
+      border-left: 3px solid var(--red);
+      border-radius: 0 8px 8px 0;
+      padding: 1rem 1.5rem;
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.82rem;
+      color: var(--white-dim);
+      margin-bottom: 3rem;
+      line-height: 1.6;
+    }
+    .merch-note strong { color: var(--red-bright); }
+
+    /* ── Product Grid ── */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .product-card {
+      background: var(--bg-2);
+      border: 1px solid #1c0000;
+      border-radius: 10px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.22s, transform 0.22s;
+    }
+
+    .product-card:hover {
+      border-color: var(--red-dark);
+      transform: translateY(-4px);
+    }
+
+    /* Imatge producte */
+    .product-img {
+      position: relative;
+      background: #0e0101;
+      aspect-ratio: 1/1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    /* Samarreta SVG placeholder */
+    .tshirt-preview {
+      width: 75%;
+      height: 75%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .product-badge {
+      position: absolute;
+      top: 0.75rem;
+      left: 0.75rem;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      background: var(--red);
+      color: var(--white);
+      padding: 0.2rem 0.5rem;
+      border-radius: 3px;
+    }
+
+    .product-info {
+      padding: 1.25rem 1.4rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-name {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.25rem;
+    }
+
+    .product-variant {
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.7rem;
+      color: var(--gray);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    .product-desc {
+      font-size: 0.82rem;
+      color: var(--white-dim);
+      line-height: 1.55;
+      flex: 1;
+      margin-bottom: 1.1rem;
+    }
+
+    .product-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .product-price {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    .product-price .old {
+      font-size: 0.8rem;
+      color: var(--gray);
+      text-decoration: line-through;
+      font-weight: 400;
+      margin-right: 0.25rem;
+    }
+
+    .add-btn {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.55rem 1.1rem;
+      border: 1.5px solid var(--white);
+      border-radius: 5px;
+      color: var(--white);
+      background: transparent;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      white-space: nowrap;
+    }
+    .add-btn:hover { background: var(--white); color: #060404; }
+
+    /* ── Talls disponibles ── */
+    .sizes {
+      display: flex;
+      gap: 0.3rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.75rem;
+    }
+    .size-tag {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      padding: 0.18rem 0.45rem;
+      border: 1px solid #2e0000;
+      border-radius: 3px;
+      color: var(--gray);
+    }
+
+    /* ── Vista prèvia samarreta (SVG inline) ── */
+    .tshirt-svg {
+      width: 140px;
+      height: 140px;
+    }
+
+    /* ── CTA enviament ── */
+    .merch-cta {
+      margin-top: 5rem;
+      padding: 3rem;
+      background: var(--bg-2);
+      border: 1px solid #1e0000;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    @media (max-width: 800px) {
+      .product-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 520px) {
+      .product-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrap">
+
+    <!-- Header -->
+    <div class="merch-header reveal">
+      <div>
+        <span style="font-family:'Oswald',sans-serif;font-size:.7rem;font-weight:600;letter-spacing:.25em;text-transform:uppercase;color:var(--red-bright);display:block;margin-bottom:1rem;">Tenda oficial</span>
+        <h1>Marxandising</h1>
+        <div class="divider"></div>
+        <p style="color:var(--white-dim);max-width:500px;font-size:.9rem;">Porta La Xopera a on vages. Cada peça finança la propera edició del festival.</p>
+      </div>
+      <a href="contacte.html" class="btn btn-red">Fer una comanda</a>
+    </div>
+
+    <div class="merch-note reveal">
+      <strong>Com funciona:</strong> El marxandising de La Xopera es ven per encàrrec. Escriu-nos a través del formulari de contacte indicant les peces i talles que vols, i t'informarem de disponibilitat i forma de pagament. Tots els beneficis van destinats íntegrament a l'organització del festival.
+    </div>
+
+    <!-- Product grid -->
+    <div class="product-grid">
+
+      <!-- Samarreta Negra -->
+      <div class="product-card reveal d1">
+        <div class="product-img">
+          <span class="product-badge">Bestseller</span>
+          <svg class="tshirt-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <!-- T-shirt shape -->
+            <path d="M60 30 L20 70 L50 80 L50 170 L150 170 L150 80 L180 70 L140 30 L115 55 C110 60 90 60 85 55 Z"
+                  fill="#0d0d0d" stroke="#2a0000" stroke-width="1.5"/>
+            <!-- Logo placeholder red circle + text -->
+            <circle cx="100" cy="115" r="28" fill="none" stroke="#cc0000" stroke-width="2.5"/>
+            <text x="100" y="110" text-anchor="middle" fill="#cc0000"
+                  font-family="Oswald,sans-serif" font-size="13" font-weight="700"
+                  text-transform="uppercase" letter-spacing="1">XOPERA</text>
+            <text x="100" y="126" text-anchor="middle" fill="#cc0000"
+                  font-family="Oswald,sans-serif" font-size="9" letter-spacing="2">FESTIVAL</text>
+          </svg>
+        </div>
+        <div class="product-info">
+          <div class="product-name">Samarreta Negra</div>
+          <div class="product-variant">Logo Roig · 100% Cotó</div>
+          <p class="product-desc">Negra, amb el logo de La Xopera en roig sobre el pit. Cotó de qualitat. Unisex.</p>
+          <div class="sizes">
+            <span class="size-tag">XS</span><span class="size-tag">S</span><span class="size-tag">M</span>
+            <span class="size-tag">L</span><span class="size-tag">XL</span><span class="size-tag">XXL</span>
+          </div>
+          <div class="product-footer">
+            <div class="product-price">15 €</div>
+            <button class="add-btn" onclick="orderItem('Samarreta Negra')">Encarregar</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Samarreta Blanca -->
+      <div class="product-card reveal d2">
+        <div class="product-img">
+          <svg class="tshirt-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <path d="M60 30 L20 70 L50 80 L50 170 L150 170 L150 80 L180 70 L140 30 L115 55 C110 60 90 60 85 55 Z"
+                  fill="#e8e6e4" stroke="#3a0000" stroke-width="1.5"/>
+            <circle cx="100" cy="115" r="28" fill="none" stroke="#cc0000" stroke-width="2.5"/>
+            <text x="100" y="110" text-anchor="middle" fill="#cc0000"
+                  font-family="Oswald,sans-serif" font-size="13" font-weight="700">XOPERA</text>
+            <text x="100" y="126" text-anchor="middle" fill="#cc0000"
+                  font-family="Oswald,sans-serif" font-size="9" letter-spacing="2">FESTIVAL</text>
+          </svg>
+        </div>
+        <div class="product-info">
+          <div class="product-name">Samarreta Blanca</div>
+          <div class="product-variant">Logo Roig · 100% Cotó</div>
+          <p class="product-desc">La versió clara per als dies de sol. Blanc trencant amb el logo roig al pit.</p>
+          <div class="sizes">
+            <span class="size-tag">XS</span><span class="size-tag">S</span><span class="size-tag">M</span>
+            <span class="size-tag">L</span><span class="size-tag">XL</span>
+          </div>
+          <div class="product-footer">
+            <div class="product-price">15 €</div>
+            <button class="add-btn" onclick="orderItem('Samarreta Blanca')">Encarregar</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hoodie -->
+      <div class="product-card reveal d3">
+        <div class="product-img">
+          <svg class="tshirt-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <!-- Hoodie shape -->
+            <path d="M65 30 Q100 20 135 30 L160 65 L175 75 L155 85 L150 80 L150 170 L50 170 L50 80 L45 85 L25 75 L40 65 Z"
+                  fill="#0d0d0d" stroke="#2a0000" stroke-width="1.5"/>
+            <!-- Hood -->
+            <path d="M75 30 Q100 15 125 30 Q120 55 100 58 Q80 55 75 30 Z"
+                  fill="#151515" stroke="#2a0000" stroke-width="1"/>
+            <!-- Logo -->
+            <text x="100" y="128" text-anchor="middle" fill="#cc0000"
+                  font-family="Oswald,sans-serif" font-size="14" font-weight="700"
+                  letter-spacing="1">LA XOPERA</text>
+            <line x1="72" y1="133" x2="128" y2="133" stroke="#660000" stroke-width="1"/>
+          </svg>
+        </div>
+        <div class="product-info">
+          <div class="product-name">Hoodie Negra</div>
+          <div class="product-variant">Logo Blanc · 80% Cotó 20% Polièster</div>
+          <p class="product-desc">Per als concerts de tardor. Càlida, còmoda i amb el logo La Xopera al pit.</p>
+          <div class="sizes">
+            <span class="size-tag">S</span><span class="size-tag">M</span>
+            <span class="size-tag">L</span><span class="size-tag">XL</span><span class="size-tag">XXL</span>
+          </div>
+          <div class="product-footer">
+            <div class="product-price">30 €</div>
+            <button class="add-btn" onclick="orderItem('Hoodie Negra')">Encarregar</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tote Bag -->
+      <div class="product-card reveal d1">
+        <div class="product-img">
+          <svg class="tshirt-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <!-- Bag body -->
+            <rect x="45" y="75" width="110" height="100" rx="4" fill="#0d0d0d" stroke="#2a0000" stroke-width="1.5"/>
+            <!-- Handles -->
+            <path d="M75 75 Q75 45 100 45 Q125 45 125 75" fill="none" stroke="#2a0000" stroke-width="8" stroke-linecap="round"/>
+            <!-- Logo -->
+            <circle cx="100" cy="125" r="25" fill="none" stroke="#cc0000" stroke-width="2"/>
+            <text x="100" y="121" text-anchor="middle" fill="#cc0000"
+                  font-family="Oswald,sans-serif" font-size="11" font-weight="700">LA</text>
+            <text x="100" y="134" text-anchor="middle" fill="#cc0000"
+                  font-family="Oswald,sans-serif" font-size="11" font-weight="700">XOPERA</text>
+          </svg>
+        </div>
+        <div class="product-info">
+          <div class="product-name">Tote Bag</div>
+          <div class="product-variant">Negra · Logo Roig · Cotó Orgànic</div>
+          <p class="product-desc">Per al mercat, per a la platja, per a tots els dies. Resistent i amb ànima.</p>
+          <div class="sizes">
+            <span class="size-tag">Talla Única</span>
+          </div>
+          <div class="product-footer">
+            <div class="product-price">10 €</div>
+            <button class="add-btn" onclick="orderItem('Tote Bag')">Encarregar</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pegatines -->
+      <div class="product-card reveal d2">
+        <div class="product-img">
+          <svg class="tshirt-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <!-- Sticker sheet -->
+            <rect x="40" y="40" width="120" height="120" rx="8" fill="#0d0d0d" stroke="#2a0000" stroke-width="1.5" stroke-dasharray="4 3"/>
+            <!-- 3 stickers -->
+            <circle cx="80" cy="80" r="22" fill="none" stroke="#cc0000" stroke-width="2"/>
+            <text x="80" y="85" text-anchor="middle" fill="#cc0000" font-family="Oswald,sans-serif" font-size="9" font-weight="700">XOPERA</text>
+            <rect x="103" y="60" width="42" height="18" rx="9" fill="#cc0000"/>
+            <text x="124" y="73" text-anchor="middle" fill="white" font-family="Oswald,sans-serif" font-size="8" font-weight="700">SOM REV.</text>
+            <rect x="55" y="112" width="90" height="26" rx="5" fill="none" stroke="#440000" stroke-width="1.5"/>
+            <text x="100" y="130" text-anchor="middle" fill="#880000" font-family="Oswald,sans-serif" font-size="8" letter-spacing="1">AUTOGESTIÓ</text>
+          </svg>
+        </div>
+        <div class="product-info">
+          <div class="product-name">Pack Enganxines</div>
+          <div class="product-variant">5 Enganxines · Vinil</div>
+          <p class="product-desc">Decora el teu portàtil, la nevera, el patinet. Pack de 5 enganxines de vinil resistents a l'aigua.</p>
+          <div class="sizes">
+            <span class="size-tag">Pack ×5</span>
+          </div>
+          <div class="product-footer">
+            <div class="product-price">5 €</div>
+            <button class="add-btn" onclick="orderItem('Pack Enganxines')">Encarregar</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pin / Xapa -->
+      <div class="product-card reveal d3">
+        <div class="product-img">
+          <svg class="tshirt-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <!-- Pin -->
+            <circle cx="100" cy="95" r="48" fill="#0d0d0d" stroke="#2a0000" stroke-width="2"/>
+            <circle cx="100" cy="95" r="42" fill="none" stroke="#1a0000" stroke-width="1"/>
+            <circle cx="100" cy="95" r="36" fill="none" stroke="#cc0000" stroke-width="2.5"/>
+            <text x="100" y="90" text-anchor="middle" fill="#cc0000"
+                  font-family="Oswald,sans-serif" font-size="14" font-weight="700">LA</text>
+            <text x="100" y="107" text-anchor="middle" fill="#cc0000"
+                  font-family="Oswald,sans-serif" font-size="14" font-weight="700">XOPERA</text>
+            <!-- Pin clip -->
+            <line x1="85" y1="143" x2="115" y2="143" stroke="#2a2a2a" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="product-info">
+          <div class="product-name">Xapa</div>
+          <div class="product-variant">58mm · Logo Roig</div>
+          <p class="product-desc">La xapa clàssica del festival. Per a la motxilla, la jaqueta o on vullgues.</p>
+          <div class="sizes">
+            <span class="size-tag">58 mm</span>
+          </div>
+          <div class="product-footer">
+            <div class="product-price">2 €</div>
+            <button class="add-btn" onclick="orderItem('Xapa')">Encarregar</button>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /product-grid -->
+
+    <!-- CTA -->
+    <div class="merch-cta reveal">
+      <h3 style="margin-bottom:0.75rem;">Vols fer una comanda?</h3>
+      <p style="color:var(--white-dim);font-size:.88rem;max-width:520px;margin:0 auto 1.8rem;">Escriu-nos a través del formulari de contacte indicant els productes que t'interessen. T'explicarem com procedir.</p>
+      <a href="contacte.html" class="btn btn-lg">Escriure'ns</a>
+    </div>
+
+  </div><!-- /page-wrap -->
+
+  <script src="js/nav.js"></script>
+  <script>
+    function orderItem(name) {
+      window.location.href = `contacte.html?motiu=marxandising&producte=${encodeURIComponent(name)}`;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edicions Anteriors — La Xopera Festival</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;600;700&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+  <style>
+    /* ── Hero edició ── */
+    .edition-hero {
+      position: relative;
+      min-height: 72vh;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+      border-radius: 10px;
+      margin-bottom: 5rem;
+    }
+    .edition-hero img.bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      filter: saturate(1.1) brightness(0.55);
+    }
+    .edition-hero .overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(6,4,4,0.96) 0%, rgba(6,4,4,0.45) 55%, transparent 100%);
+    }
+    .edition-hero .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 3rem;
+    }
+    .edition-hero .edition-num {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--red-bright);
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+    .edition-hero h1 { margin-bottom: 0.6rem; }
+    .edition-hero .meta {
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.88rem;
+      color: rgba(240,238,236,0.6);
+      letter-spacing: 0.08em;
+    }
+
+    /* ── Artistes ── */
+    .artist-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+    .artist-card {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      aspect-ratio: 3/4;
+      cursor: default;
+    }
+    .artist-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(1.05) brightness(0.75);
+      transition: filter 0.35s ease, transform 0.35s ease;
+    }
+    .artist-card:hover img {
+      filter: saturate(1.2) brightness(0.9);
+      transform: scale(1.04);
+    }
+    .artist-card .ac-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(6,4,4,0.9) 0%, transparent 55%);
+      display: flex;
+      align-items: flex-end;
+      padding: 1rem;
+    }
+    .artist-card .ac-name {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      line-height: 1.15;
+    }
+    .artist-card .ac-genre {
+      font-size: 0.68rem;
+      font-family: 'Courier Prime', monospace;
+      color: var(--red-bright);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-top: 0.2rem;
+    }
+    /* Placeholder artista sense imatge */
+    .artist-ph {
+      background: var(--bg-2);
+      border: 1px solid #1a0000;
+      border-radius: 8px;
+      aspect-ratio: 3/4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      text-align: center;
+      gap: 0.5rem;
+    }
+    .artist-ph .ph-icon {
+      width: 48px;
+      height: 48px;
+      border: 2px solid var(--red-deep);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--red-dark);
+      font-size: 1.4rem;
+    }
+    .artist-ph .ph-name {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .artist-ph .ph-genre {
+      font-size: 0.65rem;
+      color: var(--red-bright);
+      font-family: 'Courier Prime', monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    /* ── Activitats ── */
+    .activitat-tag {
+      display: inline-block;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border: 1px solid #2a0000;
+      border-radius: 4px;
+      padding: 0.45rem 0.9rem;
+      color: var(--white-dim);
+      margin: 0.3rem;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .activitat-tag:hover {
+      border-color: var(--red-dark);
+      color: var(--white);
+    }
+
+    /* ── Galeria ── */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    .gallery-item {
+      border-radius: 8px;
+      overflow: hidden;
+      aspect-ratio: 4/5;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.85) saturate(1.1);
+      transition: filter 0.3s;
+    }
+    .gallery-item:hover img { filter: brightness(1) saturate(1.3); }
+    .gallery-item.tall { grid-row: span 2; aspect-ratio: auto; }
+
+    /* ── Menjar ── */
+    .menjar-list {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .menjar-item {
+      flex: 1;
+      min-width: 200px;
+      background: var(--bg-2);
+      border: 1px solid #1a0000;
+      border-radius: 8px;
+      padding: 1.5rem 2rem;
+      text-align: center;
+    }
+    .menjar-item .mi-label {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--red-bright);
+      margin-bottom: 0.35rem;
+    }
+    .menjar-item .mi-name {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    /* ── Quote ── */
+    .quote-block {
+      border-left: 3px solid var(--red);
+      padding: 1.5rem 2rem;
+      background: var(--bg-2);
+      border-radius: 0 8px 8px 0;
+    }
+    .quote-block blockquote {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(1.3rem, 2.5vw, 2rem);
+      font-weight: 700;
+      text-transform: uppercase;
+      line-height: 1.2;
+      letter-spacing: 0.03em;
+      color: var(--white);
+    }
+    .quote-block cite {
+      display: block;
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.78rem;
+      color: var(--gray);
+      margin-top: 0.75rem;
+      font-style: normal;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+    }
+
+    @media (max-width: 960px) {
+      .artist-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 680px) {
+      .artist-grid { grid-template-columns: repeat(2, 1fr); }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .edition-hero .hero-content { padding: 1.75rem; }
+    }
+    @media (max-width: 480px) {
+      .artist-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrap">
+
+    <!-- ── HERO ── -->
+    <div class="edition-hero reveal">
+      <img src="assets/cartel-grupos.jpg" alt="Cartell I Edició" class="bg">
+      <div class="overlay"></div>
+      <div class="hero-content">
+        <span class="edition-num">I Edició</span>
+        <h1>La Xopera 2025</h1>
+        <p class="meta">18 d'Octubre de 2025 &nbsp;·&nbsp; Estivella, Camp de Morvedre &nbsp;·&nbsp; Entrada lliure</p>
+      </div>
+    </div>
+
+    <!-- ── INTRO ── -->
+    <div class="section">
+      <div class="reveal">
+        <span class="page-hero label" style="font-family:'Oswald',sans-serif;font-size:.7rem;font-weight:600;letter-spacing:.25em;text-transform:uppercase;color:var(--red-bright);display:block;margin-bottom:1rem;">Com va ser</span>
+        <h2>La primera vegada</h2>
+        <div class="divider"></div>
+      </div>
+      <div class="reveal" style="max-width:720px;">
+        <p>La primera edició de La Xopera va demostrar que era possible. Un festival autogestionat, amb entrada lliure, en mig del Camp de Morvedre, ple de música, art, humor i comunitat. Tot gràcies a qui va creure en el projecte des del primer moment.</p>
+        <p>Vuit bandes, grafitters, activitats per a xiquets, paella popular i cantells. Del matí fins a la nit. Sense corporacions. Sense intermediaris. Del poble i per al poble.</p>
+      </div>
+    </div>
+
+    <!-- ── ARTISTES ── -->
+    <div class="section">
+      <div class="reveal">
+        <span style="font-family:'Oswald',sans-serif;font-size:.7rem;font-weight:600;letter-spacing:.25em;text-transform:uppercase;color:var(--red-bright);display:block;margin-bottom:1rem;">Música</span>
+        <h2>Artistes</h2>
+        <div class="divider"></div>
+      </div>
+      <div class="artist-grid">
+        <div class="artist-card reveal d1">
+          <img src="assets/cartel-lopezintheair.jpg" alt="López in the Air">
+          <div class="ac-overlay"><div><div class="ac-name">López<br>in the Air</div><div class="ac-genre">Indie</div></div></div>
+        </div>
+        <div class="artist-card reveal d2">
+          <img src="assets/cartel-serginagant.jpg" alt="Sergi Nagant">
+          <div class="ac-overlay"><div><div class="ac-name">Sergi<br>Nagant</div><div class="ac-genre">Rap</div></div></div>
+        </div>
+        <div class="artist-card reveal d3">
+          <img src="assets/cartel-arreak.jpg" alt="Arre AK">
+          <div class="ac-overlay"><div><div class="ac-name">Arre AK</div><div class="ac-genre">Rock · Ska</div></div></div>
+        </div>
+        <div class="artist-card reveal d4">
+          <img src="assets/cartel-rekaida.jpg" alt="Rekaída">
+          <div class="ac-overlay"><div><div class="ac-name">Rekaída</div><div class="ac-genre">Punk · Rock</div></div></div>
+        </div>
+        <div class="artist-card reveal d1">
+          <img src="assets/cartel-summerends.jpg" alt="Summer Ends">
+          <div class="ac-overlay"><div><div class="ac-name">Summer Ends</div><div class="ac-genre">Rock</div></div></div>
+        </div>
+        <div class="artist-card reveal d2">
+          <img src="assets/cartel-thestrangis.jpg" alt="The Strangis">
+          <div class="ac-overlay"><div><div class="ac-name">The Strangis</div><div class="ac-genre">Rock</div></div></div>
+        </div>
+        <div class="artist-card reveal d3">
+          <img src="assets/cartel-huluna.jpg" alt="Huluna Soundsystem">
+          <div class="ac-overlay"><div><div class="ac-name">Huluna<br>Soundsystem</div><div class="ac-genre">Reggae · DNB</div></div></div>
+        </div>
+        <div class="artist-card reveal d4">
+          <img src="assets/cartel-mskagency.jpg" alt="MSK Agency">
+          <div class="ac-overlay"><div><div class="ac-name">MSK Agency</div><div class="ac-genre">Freestyle · Rap</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── ACTIVITATS ── -->
+    <div class="section">
+      <div class="reveal">
+        <span style="font-family:'Oswald',sans-serif;font-size:.7rem;font-weight:600;letter-spacing:.25em;text-transform:uppercase;color:var(--red-bright);display:block;margin-bottom:1rem;">Més que música</span>
+        <h2>Activitats</h2>
+        <div class="divider"></div>
+      </div>
+      <div class="reveal" style="margin-bottom:2rem;">
+        <span class="activitat-tag">Graffiters</span>
+        <span class="activitat-tag">Micro Obert</span>
+        <span class="activitat-tag">Música en Viu</span>
+        <span class="activitat-tag">Activitats per a Xiquets</span>
+        <span class="activitat-tag">Humor Amarillo</span>
+        <span class="activitat-tag">Futbolí</span>
+      </div>
+    </div>
+
+    <!-- ── MENJARS ── -->
+    <div class="section">
+      <div class="reveal">
+        <span style="font-family:'Oswald',sans-serif;font-size:.7rem;font-weight:600;letter-spacing:.25em;text-transform:uppercase;color:var(--red-bright);display:block;margin-bottom:1rem;">Gastronomia Popular</span>
+        <h2>Menjars</h2>
+        <div class="divider"></div>
+      </div>
+      <div class="menjar-list reveal">
+        <div class="menjar-item">
+          <div class="mi-label">Esmorzar</div>
+          <div class="mi-name">Embutits Extremenys</div>
+        </div>
+        <div class="menjar-item">
+          <div class="mi-label">Dinar</div>
+          <div class="mi-name">Paella</div>
+        </div>
+        <div class="menjar-item">
+          <div class="mi-label">Sopar</div>
+          <div class="mi-name">Cantells</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── GALERIA ── -->
+    <div class="section">
+      <div class="reveal">
+        <span style="font-family:'Oswald',sans-serif;font-size:.7rem;font-weight:600;letter-spacing:.25em;text-transform:uppercase;color:var(--red-bright);display:block;margin-bottom:1rem;">Imatges</span>
+        <h2>Galeria</h2>
+        <div class="divider"></div>
+      </div>
+      <div class="gallery-grid reveal">
+        <div class="gallery-item tall">
+          <img src="assets/cartel-info.jpg" alt="Informació I Edició">
+        </div>
+        <div class="gallery-item">
+          <img src="assets/portada-info.jpg" alt="Portada info">
+        </div>
+        <div class="gallery-item">
+          <img src="assets/artista-5.jpg" alt="Artista">
+        </div>
+        <div class="gallery-item">
+          <img src="assets/artista-6.jpg" alt="Artista">
+        </div>
+        <div class="gallery-item">
+          <img src="assets/horario.jpg" alt="Horari">
+        </div>
+      </div>
+    </div>
+
+    <!-- ── QUOTE ── -->
+    <div class="section reveal">
+      <div class="quote-block">
+        <blockquote>«Va ser possible gràcies a vosaltres.»</blockquote>
+        <cite>— La Xopera, Declaració d'Intencions II</cite>
+      </div>
+    </div>
+
+    <!-- ── CTA ── -->
+    <div class="reveal" style="text-align:center; padding:2rem 0;">
+      <p style="font-family:'Courier Prime',monospace;font-size:.82rem;color:var(--white-dim);letter-spacing:.12em;text-transform:uppercase;margin-bottom:1.5rem;">La II Edició s'apropa</p>
+      <a href="proxima-edicio.html" class="btn btn-lg">Veure Pròxima Edició</a>
+    </div>
+
+  </div><!-- /page-wrap -->
+
+  <script src="js/nav.js"></script>
+</body>
+</html>
