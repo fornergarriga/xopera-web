@@ -1,0 +1,378 @@
+/* =====================================================
+   LA XOPERA FESTIVAL — Sistema Visual Compartit
+   Paleta: Negre #060404 · Roig #cc0000 · Blanc #f0eeec
+   Tipografia: Oswald (títols) + Courier Prime (cos)
+   ===================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap');
+
+:root {
+  --bg:          #060404;
+  --bg-2:        #0e0101;
+  --bg-3:        #160202;
+  --red-deep:    #5a0000;
+  --red-dark:    #880000;
+  --red:         #cc0000;
+  --red-bright:  #e82222;
+  --red-glow:    rgba(200,0,0,0.18);
+  --white:       #f0eeec;
+  --white-dim:   rgba(240,238,236,0.6);
+  --gray:        #888884;
+  --gray-dark:   #2e2a2a;
+  --nav-h:       62px;
+  --max-w:       1100px;
+  --pad:         2.5rem;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: 'Courier Prime', 'Courier New', monospace;
+  font-size: 16px;
+  line-height: 1.78;
+  opacity: 0;
+  transition: opacity 0.42s ease;
+  overflow-x: hidden;
+}
+body.loaded { opacity: 1; }
+
+/* ─── TIPOGRAFIA ─────────────────────────────────── */
+h1, h2, h3, h4 {
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  line-height: 1.08;
+  font-weight: 700;
+}
+h1 { font-size: clamp(2.6rem, 6vw, 4.8rem); }
+h2 { font-size: clamp(1.7rem, 3.8vw, 3rem); }
+h3 { font-size: clamp(1.1rem, 2.2vw, 1.7rem); font-weight: 600; }
+h4 { font-size: 1rem; font-weight: 600; letter-spacing: 0.12em; }
+
+p { margin-bottom: 1.1em; }
+p:last-child { margin-bottom: 0; }
+
+a { color: inherit; }
+
+.text-red    { color: var(--red-bright); }
+.text-dim    { color: var(--white-dim); }
+.text-gray   { color: var(--gray); }
+.uppercase   { text-transform: uppercase; }
+.mono        { font-family: 'Courier Prime', monospace; }
+
+/* ─── NAVEGACIÓ ──────────────────────────────────── */
+.main-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--nav-h);
+  background: rgba(4,2,2,0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(180,0,0,0.22);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--pad);
+  z-index: 1000;
+  gap: 1.5rem;
+}
+
+.nav-logo img {
+  height: 34px;
+  width: auto;
+  display: block;
+  flex-shrink: 0;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 0;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.nav-links a {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--white-dim);
+  text-decoration: none;
+  padding: 0.32rem 0.65rem;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  transition: color 0.18s, border-color 0.18s;
+  white-space: nowrap;
+}
+
+.nav-links a:hover {
+  color: var(--white);
+  border-color: rgba(180,0,0,0.5);
+}
+
+.nav-links a.active {
+  color: var(--red-bright);
+  border-color: var(--red-dark);
+}
+
+/* ─── BOTONS ─────────────────────────────────────── */
+.btn {
+  display: inline-block;
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  text-decoration: none;
+  padding: 0.72rem 1.55rem;
+  border: 1.5px solid var(--white);
+  border-radius: 6px;
+  color: var(--white);
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  line-height: 1;
+}
+
+.btn:hover {
+  background: var(--white);
+  color: var(--bg);
+  border-color: var(--white);
+}
+
+.btn-red {
+  border-color: var(--red-dark);
+  color: var(--red-bright);
+}
+
+.btn-red:hover {
+  background: var(--red);
+  color: var(--white);
+  border-color: var(--red);
+}
+
+.btn-lg {
+  padding: 1rem 2.6rem;
+  font-size: 0.95rem;
+  border-width: 2px;
+}
+
+.btn-xl {
+  padding: 1.2rem 3.5rem;
+  font-size: 1.1rem;
+  border-width: 2px;
+  letter-spacing: 0.18em;
+}
+
+/* ─── LAYOUT ─────────────────────────────────────── */
+.page-wrap {
+  padding-top: calc(var(--nav-h) + 4rem);
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding-left: var(--pad);
+  padding-right: var(--pad);
+  padding-bottom: 9rem;
+}
+
+.section { margin-bottom: 6.5rem; }
+
+.page-hero {
+  margin-bottom: 5rem;
+  border-bottom: 1px solid var(--bg-3);
+  padding-bottom: 3rem;
+}
+
+.page-hero .label {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--red-bright);
+  display: block;
+  margin-bottom: 1rem;
+}
+
+/* ─── SEPARADOR ──────────────────────────────────── */
+.divider {
+  width: 48px;
+  height: 3px;
+  background: var(--red);
+  margin: 1.4rem 0 2.2rem;
+}
+
+.divider-full {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, var(--red-dark), transparent);
+  margin: 4rem 0;
+}
+
+/* ─── SCROLL REVEAL ──────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.68s ease, transform 0.68s ease;
+}
+.reveal.visible { opacity: 1; transform: none; }
+.reveal.from-left  { transform: translateX(-32px); }
+.reveal.from-right { transform: translateX(32px); }
+.reveal.from-left.visible, .reveal.from-right.visible { transform: none; }
+.d1 { transition-delay: 0.08s; }
+.d2 { transition-delay: 0.18s; }
+.d3 { transition-delay: 0.28s; }
+.d4 { transition-delay: 0.38s; }
+
+/* ─── GRID ───────────────────────────────────────── */
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+
+/* ─── CARD ───────────────────────────────────────── */
+.card {
+  background: var(--bg-2);
+  border: 1px solid #180000;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.card:hover {
+  border-color: var(--red-dark);
+  transform: translateY(-3px);
+}
+
+.card-body { padding: 1.4rem; }
+.card-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.5rem;
+}
+.card-text { font-size: 0.88rem; color: var(--white-dim); line-height: 1.6; }
+
+/* ─── PLACEHOLDER D'IMATGE ───────────────────────── */
+.img-ph {
+  background: repeating-linear-gradient(
+    45deg,
+    #0c0101, #0c0101 10px,
+    #110101 10px, #110101 20px
+  );
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1.5rem;
+  gap: 0.5rem;
+  color: var(--gray);
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.img-ph::before {
+  content: '[ ]';
+  font-size: 1.8rem;
+  color: var(--red-deep);
+}
+
+/* ─── FORMULARI ──────────────────────────────────── */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-label {
+  display: block;
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--white-dim);
+  margin-bottom: 0.55rem;
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+  width: 100%;
+  background: var(--bg-2);
+  border: 1px solid #2a0000;
+  border-radius: 5px;
+  color: var(--white);
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.95rem;
+  padding: 0.75rem 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  border-color: var(--red-dark);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 130px;
+  line-height: 1.7;
+}
+
+.form-select { cursor: pointer; }
+
+.form-select option { background: #160202; }
+
+/* ─── TAULA ──────────────────────────────────────── */
+.table-wrap { overflow-x: auto; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+thead th {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--red-bright);
+  padding: 0.75rem 1.2rem;
+  text-align: left;
+  border-bottom: 1px solid var(--red-deep);
+}
+tbody td {
+  padding: 0.9rem 1.2rem;
+  border-bottom: 1px solid #1a0000;
+  color: var(--white-dim);
+  vertical-align: middle;
+}
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover td { background: rgba(180,0,0,0.05); color: var(--white); }
+
+/* ─── RESPONSIVE ─────────────────────────────────── */
+@media (max-width: 960px) {
+  :root { --pad: 1.5rem; }
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .grid-3 { grid-template-columns: repeat(2, 1fr); }
+  .main-nav .nav-links { display: none; }
+  .main-nav { justify-content: space-between; }
+}
+
+@media (max-width: 600px) {
+  :root { --pad: 1.25rem; }
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  h1 { font-size: 2.4rem; }
+  h2 { font-size: 1.7rem; }
+}
